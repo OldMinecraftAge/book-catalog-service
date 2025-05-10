@@ -100,3 +100,45 @@ Includes:
 
 * Unit tests for service logic and tokens
 * Integration tests for login + book APIs
+---
+
+## Docker Setup
+
+This project supports Docker for local development.
+
+### Files:
+
+* `Dockerfile`: builds the app into a secure image
+* `docker-compose.yml`: spins up the app + MySQL together
+* `.env.example`: shows the required environment variables
+* `.env`: your local config (never committed)
+
+### Prerequisites:
+
+* Docker Desktop (Windows/Mac) or Docker CLI + Compose (Linux)
+
+### Steps to run with Docker:
+
+1. Copy the example env:
+
+   ```bash
+   cp .env.example .env
+   # Edit .env with your actual local secrets (or leave defaults for dev)
+   ```
+2. Start containers:
+
+   ```bash
+   docker-compose up --build
+   ```
+3. Access:
+
+   * Swagger: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+   * MySQL: running internally at `db:3306`
+
+### Stopping & resetting:
+
+```bash
+docker-compose down       # stop
+
+docker-compose down -v    # stop & delete DB volume (wipe data)
+```

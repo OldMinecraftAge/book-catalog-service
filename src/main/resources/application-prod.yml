@@ -1,7 +1,7 @@
 spring:
   config:
     activate:
-      on-profile: dev
+      on-profile: prod
   datasource:
     url: ${SPRING_DATASOURCE_URL}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -9,7 +9,7 @@ spring:
     password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     show-sql: false
 server:
   port: ${SERVER_PORT:8080}
@@ -21,8 +21,8 @@ totp:
   secret: ${TOTP_SECRET}
 jwt:
   secret: ${JWT_SECRET}
-  otpExpirationMinutes: 5
-  authExpirationMinutes: 60
+  otpExpirationMinutes: ${JWT_OTP_EXPIRATION}
+  authExpirationMinutes: ${JWT_AUTH_EXPIRATION}
 logging:
   level:
     root: INFO

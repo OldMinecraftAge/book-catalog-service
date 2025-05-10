@@ -85,6 +85,10 @@ public class JwtUtil {
                     .build()
                     .parseSignedClaims(token)
                     .getPayload();
+            Boolean pending = claims.get("otpPending", Boolean.class);
+            if (pending != null && pending) {
+                throw new IllegalArgumentException("OTP token is not valid for full API access");
+            }
             return claims.getSubject();
         } catch (JwtException | IllegalArgumentException ex) {
             log.warn("Invalid or expired auth token", ex);
