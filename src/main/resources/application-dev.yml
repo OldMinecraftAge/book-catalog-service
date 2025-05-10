@@ -1,0 +1,43 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  application:
+    name: book-catalog-service
+  datasource:
+    url: jdbc:h2:mem:bookdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+server:
+  port: ${SERVER_PORT:8080}
+security:
+  admin:
+    username: ${ADMIN_USERNAME:admin}
+    password: ${ADMIN_PASSWORD:password}
+totp:
+  secret: ${TOTP_SECRET:JBSWY3DPEHPK3PXP}
+jwt:
+  secret: ${JWT_SECRET:ABCDEFGHIJKLMNOPQRSTUVWXZY0123456789ABCDEF}
+  otpExpirationMinutes: 5
+  authExpirationMinutes: 60
+logging:
+  level:
+    org.springframework: DEBUG
+    com.vishnu.bookcatalog: DEBUG
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
