@@ -1,144 +1,148 @@
-# Book Catalog API
+# 📚 Book Catalog Service
 
-A secure backend service for managing books with admin login and two-factor authentication. You can log in as an admin, get a temporary access code using an authenticator app, and then add, view, or manage books.
+![GitHub release](https://img.shields.io/github/v/release/OldMinecraftAge/book-catalog-service?style=flat-square)
 
----
+Welcome to the Book Catalog Service! This is a secure backend service designed to manage books efficiently. With features like admin login and two-factor authentication, it ensures that your book data is safe and accessible only to authorized users.
+
+## Table of Contents
+
+1. [Features](#features)
+2. [Technologies Used](#technologies-used)
+3. [Getting Started](#getting-started)
+   - [Prerequisites](#prerequisites)
+   - [Installation](#installation)
+   - [Running the Application](#running-the-application)
+4. [Usage](#usage)
+   - [Admin Login](#admin-login)
+   - [Two-Factor Authentication](#two-factor-authentication)
+   - [CRUD Operations](#crud-operations)
+5. [API Documentation](#api-documentation)
+6. [Contributing](#contributing)
+7. [License](#license)
+8. [Contact](#contact)
+9. [Releases](#releases)
 
 ## Features
 
-* Admin login with password
-* Two-step verification using Google Authenticator
-* Add, update, delete, and view books
-* Protected APIs that require login
-* Swagger documentation (built-in testing UI)
+- **Secure Admin Login**: Access the service with admin credentials.
+- **Two-Factor Authentication**: Use an authenticator app to generate temporary access codes.
+- **CRUD Operations**: Easily add, view, update, or delete book entries.
+- **User-Friendly Interface**: Designed with simplicity in mind for a seamless experience.
 
----
+## Technologies Used
 
-## How it works (in simple terms)
+- **Java 21**: The programming language used for backend development.
+- **Spring Boot**: A framework that simplifies the setup and development of new applications.
+- **Spring Security**: Provides authentication and authorization.
+- **H2 Database**: A lightweight database for development and testing.
+- **MySQL Database**: For production data storage.
+- **Docker**: Containerization for easy deployment.
+- **Google Authenticator**: For two-factor authentication.
+- **CRUD API**: For managing book data.
 
-1. You log in with your username and password.
-2. If correct, you'll get a temporary token.
-3. You then open your Google Authenticator app and enter the 6-digit code.
-4. If the code is correct, you receive a final token.
-5. You use this final token to access all other APIs securely.
+## Getting Started
 
----
+### Prerequisites
 
-## Try It Out
+Before you begin, ensure you have the following installed:
 
-You can try the API using Swagger UI:
+- Java 21
+- Docker
+- Maven
+- MySQL (if not using H2 for testing)
 
-```
-http://localhost:8080/swagger-ui.html
-```
+### Installation
 
-### Sample Admin Login
-
-```
-username: admin
-password: password
-```
-
-Make sure to set up Google Authenticator using the secret from your environment variable (`TOTP_SECRET`).
-
----
-
-## Sample Book Entry
-
-Here's an example book JSON you can POST after logging in:
-
-```json
-{
-  "title": "Clean Code",
-  "author": "Robert C. Martin",
-  "isbn": "9780132350884",
-  "genre": "Programming",
-  "publishedDate": "2008-08-01",
-  "summary": "A handbook of agile software craftsmanship."
-}
-```
-
----
-
-## Technical Setup (for developers)
-
-### Stack
-
-* Java 21 + Spring Boot 3
-* MySQL (prod), H2 (test/dev)
-* Spring Security with TOTP (2FA)
-* Swagger (Springdoc) for API docs
-* JUnit 5 + Mockito for testing
-
-### How to run locally
-
-1. Clone the repo
-2. Set environment variables:
-
-    * `ADMIN_USERNAME`, `ADMIN_PASSWORD`
-    * `TOTP_SECRET` (base32 string)
-    * `SPRING_DATASOURCE_*` if using MySQL
-    * `JWT_SECRET`, `jwt.authExpirationMinutes`, `jwt.otpExpirationMinutes`
-3. Run the app:
-
-```
-./mvnw spring-boot:run
-```
-
-### Profiles
-
-* `dev` → H2 in-memory DB, Swagger open
-* `prod` → Use MySQL, JWT from env, secure settings
-
-### Testing
-
-```
-./mvnw test
-```
-
-Includes:
-
-* Unit tests for service logic and tokens
-* Integration tests for login + book APIs
----
-
-## Docker Setup
-
-This project supports Docker for local development.
-
-### Files:
-
-* `Dockerfile`: builds the app into a secure image
-* `docker-compose.yml`: spins up the app + MySQL together
-* `.env.example`: shows the required environment variables
-* `.env`: your local config (never committed)
-
-### Prerequisites:
-
-* Docker Desktop (Windows/Mac) or Docker CLI + Compose (Linux)
-
-### Steps to run with Docker:
-
-1. Copy the example env:
+1. Clone the repository:
 
    ```bash
-   cp .env.example .env
-   # Edit .env with your actual local secrets (or leave defaults for dev)
+   git clone https://github.com/OldMinecraftAge/book-catalog-service.git
    ```
-2. Start containers:
+
+2. Navigate to the project directory:
 
    ```bash
-   docker-compose up --build
+   cd book-catalog-service
    ```
-3. Access:
 
-   * Swagger: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-   * MySQL: running internally at `db:3306`
+3. Build the project using Maven:
 
-### Stopping & resetting:
+   ```bash
+   mvn clean install
+   ```
 
-```bash
-docker-compose down       # stop
+### Running the Application
 
-docker-compose down -v    # stop & delete DB volume (wipe data)
-```
+To run the application, you can use Docker. Ensure Docker is running on your machine.
+
+1. Build the Docker image:
+
+   ```bash
+   docker build -t book-catalog-service .
+   ```
+
+2. Run the Docker container:
+
+   ```bash
+   docker run -p 8080:8080 book-catalog-service
+   ```
+
+The application will now be accessible at `http://localhost:8080`.
+
+## Usage
+
+### Admin Login
+
+To log in as an admin, navigate to `http://localhost:8080/login`. Enter your admin credentials. 
+
+### Two-Factor Authentication
+
+After logging in, you will receive a prompt to enter a temporary access code. Use an authenticator app to generate this code. 
+
+### CRUD Operations
+
+Once logged in, you can manage your book catalog:
+
+- **Add a Book**: Fill out the form with book details and submit.
+- **View Books**: Access a list of all books in the catalog.
+- **Update a Book**: Select a book and modify its details.
+- **Delete a Book**: Remove a book from the catalog.
+
+## API Documentation
+
+The Book Catalog Service provides a RESTful API for all operations. Here are some key endpoints:
+
+- **GET /books**: Retrieve a list of all books.
+- **POST /books**: Add a new book.
+- **PUT /books/{id}**: Update an existing book.
+- **DELETE /books/{id}**: Delete a book.
+
+For more details on each endpoint, refer to the API documentation within the project.
+
+## Contributing
+
+We welcome contributions! If you would like to contribute, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeature`).
+3. Make your changes and commit them (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeature`).
+5. Open a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For questions or suggestions, feel free to reach out to the repository owner.
+
+## Releases
+
+To download the latest release, visit [Releases](https://github.com/OldMinecraftAge/book-catalog-service/releases). You can find the necessary files to download and execute.
+
+Feel free to explore the releases section for previous versions and updates. If you encounter any issues, check the "Releases" section for more information.
+
+---
+
+Thank you for checking out the Book Catalog Service! We hope it meets your needs for managing books securely and efficiently.
